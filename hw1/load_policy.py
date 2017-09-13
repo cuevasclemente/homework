@@ -1,9 +1,12 @@
-import pickle, tensorflow as tf, tf_util, numpy as np
+import tensorflow as tf, tf_util, numpy as np
+import dill as pickle
 
 def load_policy(filename):
     with open(filename, 'rb') as f:
+        if "Roboschool" in filename:
+            data = pickle.load(f)
+            return lambda x: data.act(x)[0]
         data = pickle.loads(f.read())
-
     # assert len(data.keys()) == 2
     nonlin_type = data['nonlin_type']
     policy_type = [k for k in data.keys() if k != 'nonlin_type'][0]

@@ -13,6 +13,7 @@ import pickle
 import tensorflow as tf
 import numpy as np
 import tf_util
+import roboschool
 import gym
 import load_policy
 
